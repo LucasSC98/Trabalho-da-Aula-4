@@ -10,111 +10,183 @@
 
       body {
         font-family: "Inter", sans-serif;
-        background-color: #f3f4f6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
         min-height: 100vh;
         padding: 20px;
+        gap: 30px;
+        margin-top: 20px;
       }
 
       .container {
         background-color: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px -12px rgba(102, 126, 234, 0.15);
         max-width: 600px;
         width: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 30px 60px -12px rgba(102, 126, 234, 0.2);
       }
 
       h1 {
         font-size: 1.75rem;
         font-weight: 700;
-        color: #1f2937;
-        margin-bottom: 10px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
       }
 
       .subtitle {
-        font-size: 1rem;
-        color: #6b7280;
-        margin-bottom: 20px;
+        font-size: 0.95rem;
+        color: #9ca3af;
+        margin-bottom: 25px;
+        line-height: 1.5;
       }
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 22px;
       }
 
       label {
         display: block;
         font-weight: 600;
-        color: #4b5563;
+        color: #374151;
         margin-bottom: 8px;
+        font-size: 0.95rem;
       }
 
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
       input[type="file"] {
-        border: 2px solid #d1d5db;
-        padding: 10px;
-        border-radius: 8px;
+        border: 2px solid #e5e7eb;
+        padding: 12px 14px;
+        border-radius: 10px;
         width: 100%;
-        transition: border-color 0.2s;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        background-color: #f9fafb;
+        font-size: 0.95rem;
       }
 
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
       input[type="file"]:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color: #667eea;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.08);
+      }
+
+      input::placeholder {
+        color: #d1d5db;
       }
 
       button {
         width: 100%;
-        padding: 12px;
-        background-color: #2563eb;
+        padding: 13px 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         font-weight: 600;
-        border-radius: 8px;
-        transition: background-color 0.2s, opacity 0.2s;
+        border-radius: 10px;
+        transition: all 0.3s ease;
         cursor: pointer;
         border: none;
+        font-size: 0.95rem;
+        letter-spacing: 0.3px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
       }
 
       button:hover:not(:disabled) {
-        background-color: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active:not(:disabled) {
+        transform: translateY(0);
       }
 
       button:disabled {
-        background-color: #93c5fd;
+        background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
         cursor: not-allowed;
         opacity: 0.7;
+        box-shadow: 0 4px 15px rgba(148, 163, 184, 0.2);
       }
 
       .message-box {
         margin-top: 20px;
-        padding: 15px;
-        border-radius: 8px;
+        padding: 14px 16px;
+        border-radius: 10px;
         font-weight: 600;
         display: none;
+        border-left: 4px solid;
+        font-size: 0.95rem;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .message-box.success {
-        background-color: #d1fae5;
+        background-color: #ecfdf5;
         color: #065f46;
-        border: 1px solid #34d399;
+        border-left-color: #10b981;
       }
 
       .message-box.error {
-        background-color: #fee2e2;
+        background-color: #fef2f2;
         color: #991b1b;
-        border: 1px solid #f87171;
+        border-left-color: #ef4444;
       }
 
       .message-box.alert {
-        background-color: #fef3c7;
+        background-color: #fffbeb;
         color: #92400e;
-        border: 1px solid #fbbd24;
+        border-left-color: #fbbf24;
       }
     </style>
   </head>
   <body>
+    <form id="registerForm" action="/register" method="POST">
+      <div class="container" style="margin-bottom: 30px">
+        <h1>Registro de Usuário</h1>
+
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Registrar</button>
+        <div id="registerMessageBox" class="message-box"></div>
+      </div>
+    </form>
     <div class="container">
       <h1>Atividade: Upload Múltiplo</h1>
       <p class="subtitle">
@@ -140,12 +212,64 @@
     </div>
 
     <script>
-      // Variáveis de elementos
       const enviarBtn = document.getElementById("enviarBtn");
       const messageBox = document.getElementById("messageBox");
+      const registerMessageBox = document.getElementById("registerMessageBox");
       const arquivoInput = document.getElementById("arquivoInput");
+      const registerForm = document.querySelector("form[action='/register']");
 
-      // Adiciona o listener ao botão
+      // Função para exibir mensagens de registro
+      function exibirMensagemRegistro(mensagem, tipo) {
+        registerMessageBox.textContent = mensagem;
+        registerMessageBox.className = `message-box ${tipo}`;
+        registerMessageBox.style.display = "block";
+      }
+
+      // Listener do formulário de registro
+      registerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        })
+          .then((response) => {
+            return response.json().then((data) => ({ ok: response.ok, data }));
+          })
+          .then(({ ok, data }) => {
+            if (ok) {
+              exibirMensagemRegistro(
+                "Usuário cadastrado com sucesso! 🎉",
+                "success"
+              );
+              registerForm.reset();
+            } else {
+              exibirMensagemRegistro(
+                data.message || "Erro ao registrar usuário.",
+                "error"
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Erro ao registrar:", error);
+            exibirMensagemRegistro(
+              "Erro ao conectar com o servidor. Verifique se está rodando.",
+              "error"
+            );
+          });
+      });
+
       enviarBtn.addEventListener("click", enviarArquivos);
 
       // --- FUNÇÕES DE UTILIDADE (Já prontas) ---
@@ -178,16 +302,6 @@
             return;
           }
 
-          // ----------------------------------------------------
-          //  IMPLEMENTAÇÃO NECESSÁRIA PELO ALUNO:
-          //
-          // 2. CRIAR O OBJETO FormData
-          // 3. FAZER O LOOP (for...of)
-          // 4. USAR formData.append('meusArquivos', arquivoAtual)
-          // 5. EXECUTAR O FETCH
-          // 6. TRATAR response.ok e response.json()
-          // ----------------------------------------------------
-
           const formData = new FormData();
           for (const arquivo of arquivos) {
             formData.append("meusArquivos", arquivo);
@@ -208,8 +322,6 @@
             const errorData = await response.json();
             exibirMensagem(errorData.message || "Erro no upload.", "error");
           }
-
-          // --- FIM DO CÓDIGO DO ALUNO ---
         } catch (error) {
           console.error("Erro de requisição:", error);
           exibirMensagem(
